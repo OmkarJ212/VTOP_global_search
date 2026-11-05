@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Refined VTOP Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <img src="../../icons/icon32.png" alt="Refined VTOP" class="brand-icon">
+        <div>
+          <h1 class="brand-title">Refined VTOP</h1>
+          <span class="brand-tagline">Quick Navigation &amp; Spotlight</span>
+        </div>
+      </div>
+      <div class="status-indicator" title="Extension Active">
+        <span class="status-dot"></span>
+        <span class="status-text">Active</span>
+      </div>
+    </header>
+
+    <!-- Quick Shortcuts -->
+    <section class="section quick-actions">
+      <div class="section-title">1-Click Jump</div>
+      <div class="action-grid">
+        <button type="button" class="action-btn" id="btn-course-page" title="Course Page">📚 Courses</button>
+        <button type="button" class="action-btn" id="btn-attendance" title="Attendance">📊 Attendance</button>
+        <button type="button" class="action-btn" id="btn-timetable" title="Timetable">📅 Timetable</button>
+        <button type="button" class="action-btn" id="btn-digital-assignment" title="Digital Assignments">📝 DAs</button>
+        <button type="button" class="action-btn" id="btn-marks" title="Marks & Grades">🎯 Marks</button>
+        <button type="button" class="action-btn action-spotlight" id="btn-spotlight" title="Command Palette">⚡ Search (⌘K)</button>
+      </div>
+    </section>
+
+    <!-- Core Features Toggles -->
+    <section class="section">
+      <div class="section-title">Navigation Features</div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-label">Pinned Quick Dock</span>
+          <span class="toggle-desc">Floating 1-click pill bar in top navbar</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-quick-dock">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-label">Spotlight Command Palette</span>
+          <span class="toggle-desc">Press Ctrl+K or Cmd+K to fuzzy search pages</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-command-palette">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-label">Mega-Menu Dismiss</span>
+          <span class="toggle-desc">Click outside or press Esc to close drawer</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-menu-dismiss">
+          <span class="slider"></span>
+        </label>
+      </div>
+    </section>
+
+    <!-- Customization Settings -->
+    <section class="section">
+      <div class="section-title">Preferences</div>
+
+      <div class="setting-row">
+        <label for="select-theme" class="setting-label">Dock &amp; Palette Theme</label>
+        <select id="select-theme" class="select-input">
+          <option value="auto">Auto (System)</option>
+          <option value="light">Refined Light</option>
+          <option value="dark">Refined Dark</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="popup-footer">
+      <span class="footer-version">v2.0.0 • Manifest V3</span>
+      <a href="https://vtop.vit.ac.in" target="_blank" class="footer-link">Open VTOP ↗</a>
+    </footer>
+  </div>
+
+  <script src="../utils/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

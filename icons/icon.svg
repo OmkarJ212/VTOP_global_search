@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4338ca" />
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4338ca" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Background rounded rect -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#grad)" filter="url(#shadow)" />
+  
+  <!-- Subtle accent ring -->
+  <circle cx="64" cy="64" r="44" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="2" stroke-dasharray="4 6" />
+  
+  <!-- Modern Geometric 'V' -->
+  <path d="M40 38 L64 88 L88 38" fill="none" stroke="#ffffff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Sparkle / Refined Accent Dot -->
+  <circle cx="86" cy="38" r="5" fill="#38bdf8" />
+</svg>
