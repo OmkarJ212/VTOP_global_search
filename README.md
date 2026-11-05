@@ -1,4 +1,4 @@
-# Refined VTOP (VTOP Quick Navigation & Spotlight)
+# VTOP Global Search & Quick Navigation (Refined VTOP)
 
 > A lightweight, zero-side-effects Manifest V3 browser extension for VIT's VTOP student portal (Vellore, Chennai, Bhopal, AP) that injects a stealth 1-click Quick Dock directly into the top navbar, adds a Raycast-style `Ctrl + K` / `Cmd + K` Spotlight Search, and includes a smart navigation queue to prevent VTOP from dropping requests or freezing.
 
@@ -14,13 +14,14 @@
      - `📝 Digital Assignments`
      - `🎯 Marks & Grades`
      - `⚡ Spotlight (⌘K)`
-   - Never suffer through the cursed 5-column hover mega-menu again.
+   - Never suffer through the multi-column hover mega-menu again.
    - Encapsulated inside a **Closed Shadow DOM** (`mode: 'closed'`) so it is 100% invisible to page scripts.
 
 2. **`Ctrl + K` / `Cmd + K` Spotlight Command Palette**:
    - Press `Ctrl + K` (Windows/Linux) or `Cmd + K` (Mac) anywhere on VTOP.
-   - Fuzzy search through all 35+ VTOP routes and sub-pages instantly.
+   - Fuzzy search through all 35+ VTOP routes and sub-pages instantly in `<0.02ms`.
    - Full keyboard navigation (`↑` / `↓` to navigate, `Enter` to open, `Esc` to dismiss).
+   - Acronym search (`da` → Digital Assignments, `tt` → Timetable, `cp` → Course Page) and student keyword synonyms (`bunk`, `attendance`, `marks`, `cgpa`, `slides`, `syllabus`).
 
 3. **Smart Navigation Queue & Anti-Freeze Lock**:
    - Monitors VTOP's native `div.blockUI` and `.blockOverlay`.
@@ -40,7 +41,7 @@
 ## 📁 File Structure
 
 ```
-vtop-ui-redesign/
+VTOP_global_search/
 ├── manifest.json              # Manifest V3 specification
 ├── README.md                  # Documentation and install guide
 ├── icons/                     # Extension branding icons
@@ -72,13 +73,31 @@ vtop-ui-redesign/
 
 ---
 
-## 🚀 Installation & Usage
+## 🚀 Installation & Setup
 
-1. Open your Chromium-based browser (`chrome://extensions/` or `brave://extensions/`).
-2. Toggle **Developer mode** ON (top-right).
+### 1. Download or Clone the Repository
+```bash
+git clone https://github.com/OmkarJ212/VTOP_global_search.git
+```
+*Or click **Code** → **Download ZIP** on GitHub and extract the folder to your preferred location.*
+
+### 2. Load into Your Browser
+1. Open any Chromium-based browser (Google Chrome, Brave, Microsoft Edge, Arc, Opera):
+   - Chrome / Brave: `chrome://extensions/`
+   - Edge: `edge://extensions/`
+2. Enable **Developer mode** (toggle located in the top-right corner).
 3. Click **"Load unpacked"** (top-left).
-4. Select the project folder:
-   ```text
-   C:\Users\Omkar Joshi\Desktop\VTOP_Extention\vtop-ui-redesign
-   ```
-5. Log into VTOP Vellore (`vtop.vit.ac.in`). The floating Quick Dock will activate seamlessly in the top header.
+4. Select the `VTOP_global_search` folder.
+
+### 3. Usage
+- Navigate to your campus VTOP portal (e.g. [vtop.vit.ac.in](https://vtop.vit.ac.in)).
+- Log in to your student account.
+- The floating **Quick Dock** will appear centered in the top header.
+- Press <kbd>Ctrl</kbd> + <kbd>K</kbd> (or <kbd>Cmd</kbd> + <kbd>K</kbd> on macOS) anywhere to trigger the **Spotlight Search**.
+
+---
+
+## 🛡️ Privacy & Security
+- **100% Client-Side:** Runs completely inside your browser. No external tracking, analytics, or network requests.
+- **Stealth Boundary:** Injected elements are encapsulated in a Closed Shadow DOM (`mode: 'closed'`), undetectable by standard page scripts.
+- **Session Safe:** Prevents Spring Security token desyncs by serializing rapid navigation requests.
