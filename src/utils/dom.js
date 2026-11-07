@@ -77,35 +77,28 @@
     },
 
     /**
-     * Safely triggers native click on an element, preserving CSRF and event handlers
+     * Safely triggers native click on an element with 0ms dispatch latency
      */
     simulateNativeClick(element) {
       if (!element) return false;
 
-      // Scroll into view gently if off-screen
-      try {
-        element.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      } catch (e) {}
-
-      // Dispatch full pointer and mouse event lifecycle
-      ['pointerdown', 'mousedown', 'pointerup', 'mouseup', 'click'].forEach((type) => {
-        const evt = new MouseEvent(type, {
-          bubbles: true,
-          cancelable: true,
-          view: window
-        });
-        element.dispatchEvent(evt);
-      });
-
-      // Direct fallback if standard click didn't trigger native onclick
+      // Direct native click dispatch (0ms latency, zero scroll delay, preserves CSRF tokens)
       if (typeof element.click === 'function') {
         try {
           element.click();
+          return true;
         } catch (e) {
-          console.warn('[Refined VTOP] Direct click fallback caught:', e);
+          console.warn('[Refined VTOP] element.click() fallback:', e);
         }
       }
 
+      // Synthetic click event fallback
+      const evt = new MouseEvent('click', {
+        bubbles: true,
+        cancelable: true,
+        view: window
+      });
+      element.dispatchEvent(evt);
       return true;
     },
 

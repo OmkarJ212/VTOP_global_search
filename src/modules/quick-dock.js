@@ -56,7 +56,7 @@
      * Watches VTOP's native BlockUI overlay only during extension-initiated in-flight requests
      */
     initBlockUIObserver() {
-      const observer = new MutationObserver(() => {
+      const observer = new MutationObserver((mutations) => {
         // Only observe completion if WE triggered a navigation
         if (!this.isInFlight) return;
 
@@ -68,6 +68,13 @@
           // BlockUI appeared and now finished
           this.hasSeenBlockUI = false;
           this.onNavigationComplete();
+        } else if (!isBlocked && !this.hasSeenBlockUI) {
+          // Fast settle: if main content container mutated with new view without blockUI
+          const mainContent =
+            document.getElementById('page_outline') || document.querySelector('main, .page-content');
+          if (mainContent && mutations.some((m) => mainContent.contains(m.target))) {
+            this.onNavigationComplete();
+          }
         }
       });
 
@@ -95,13 +102,13 @@
         clearTimeout(this.stuckWatchdogTimer);
         clearTimeout(this.fallbackSettleTimer);
 
-        // Fallback: if VTOP loaded instantly without showing BlockUI, settle after 850ms
+        // Fallback: if VTOP loaded instantly without showing BlockUI, settle after 450ms
         this.fallbackSettleTimer = setTimeout(() => {
           if (this.isInFlight && !this.hasSeenBlockUI) {
-            console.log('[Refined VTOP] No BlockUI detected after 850ms. Settling queue.');
+            console.log('[Refined VTOP] Navigation settled via fallback (450ms).');
             this.onNavigationComplete();
           }
-        }, 850);
+        }, 450);
 
         // Hard watchdog: if BlockUI is stuck for > 3.8s, force unblock recovery
         this.stuckWatchdogTimer = setTimeout(() => {
@@ -139,10 +146,10 @@
         }
 
         console.log(`[Refined VTOP] Executing queued navigation: ${next.dockItem.title}`);
-        // 60ms breather to allow Spring MVC CSRF token in memory to sync
+        // Crisp 35ms breather to allow Spring MVC CSRF token in memory to sync
         setTimeout(() => {
           this.executeNavigation(next.dockItem, next.pillElement);
-        }, 60);
+        }, 35);
       }
     }
 
